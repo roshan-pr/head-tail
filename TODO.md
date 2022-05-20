@@ -1,17 +1,18 @@
 **TODO**
 
-- [ ] Make a headOfLine, returns the number of lines of count.
- - [ ] Split the content to multiple lines in head.
+- [ ] Extract split and join into functions.
 - [ ] Provide the count to the head function.
 - [ ] Use hardcode content, no external input.
 
 **MAYBE**
 
-- [ ] Consider data structure for head.
 - [ ] Consider smaller value for default count.
+- [ ] Consider data structure for head.
 
 **DONE**
 
+- [x] Make a headOfLine, returns the number of lines of count.
+ - [x] Split the content to multiple lines in head.
 - [x] Make test case for Multiple lines.
 - [x] Investigate `head` utility.
 - [x] Make mocha watch.
