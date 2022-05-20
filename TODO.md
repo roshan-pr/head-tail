@@ -1,20 +1,21 @@
 **TODO**
 
+- [ ] Implement headMain taking filename.
+
 - [ ] Implement count option to head (-n).
 - [ ] Implement bytes option to head (-c).
- - [ ] Change the contract of head function.
-- [ ] Implement options as a parameter to head.
- - [ ] Use objects for sending options.
-- [ ] Implement headMain taking filename.
 
 **MAYBE**
 
-- [ ] Consider changing names of headOfLines and head.
 - [ ] Consider data structure for head.
 - [ ] Consider to set default count of line numbers as 10.
 
 **DONE**
 
+- [x] Consider changing names of headOfLines and head.
+- [x] Implement options as a parameter to head.
+  - [x] Use objects for sending options.
+  - [x] Change the contract of head function.
 - [x] Move the split, join and constant to separate file
 - [x] Implement test for headOfLines.
 - [x] Consider smaller value for default count.
