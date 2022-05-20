@@ -1,9 +1,9 @@
 **TODO**
 
-- [ ] Use hardcode content, no external input.
-- [ ] Make test case for Multiple lines.
+- [ ] Make a headOfLine, returns the number of lines of count.
  - [ ] Split the content to multiple lines in head.
 - [ ] Provide the count to the head function.
+- [ ] Use hardcode content, no external input.
 
 **MAYBE**
 
@@ -12,6 +12,7 @@
 
 **DONE**
 
+- [x] Make test case for Multiple lines.
 - [x] Investigate `head` utility.
 - [x] Make mocha watch.
 - [x] Write a test case (happy path).
