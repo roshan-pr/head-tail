@@ -1,7 +1,13 @@
 **TODO**
 
-- [ ] Implement headMain taking filename.
+- [ ] Implement headMain taking readFile and options.
+  - [ ] Arguments to headMain is readFile and options.
+  - [ ] Test with mocking function.
+***
 
+- [ ] Implement main in head.js
+- [ ] Implement parseArgs
+  - [ ] Parse the options in headMain.
 - [ ] Implement count option to head (-n).
 - [ ] Implement bytes option to head (-c).
 
@@ -12,7 +18,7 @@
 
 **DONE**
 
-- [x] Consider changing names of headOfLines and head.
+- [x] Consider changing names of headOfLines ~~~and head~~~.
 - [x] Implement options as a parameter to head.
   - [x] Use objects for sending options.
   - [x] Change the contract of head function.

@@ -1,6 +1,6 @@
 `head - displays first lines of a file`
 
-`head [-n count | -c bytes] [file ...]`
+`head [-n lines | -c bytes] [file ...]`
 
 ```
 head file
