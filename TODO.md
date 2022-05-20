@@ -1,8 +1,11 @@
 **TODO**
 
 - [ ] Implement count option to head (-n).
+- [ ] Implement bytes option to head (-c).
  - [ ] Change the contract of head function.
 - [ ] Implement options as a parameter to head.
+ - [ ] Use objects for sending options.
+- [ ] Implement headMain taking filename.
 
 **MAYBE**
 
@@ -18,7 +21,7 @@
 - [x] Use hardcode content, no external input.
 - [x] Separate '\n' as a constant
 - [x] Extract split and join into functions.
-- [x] Make a headOfLine, returns the number of lines of count.
+- [x] Make a headOfLine, returns the lines of given count.
  - [x] Split the content to multiple lines in head.
 - [x] Make test case for Multiple lines.
 - [x] Investigate `head` utility.
