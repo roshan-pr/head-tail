@@ -13,7 +13,7 @@ describe('head', () => {
     assert.strictEqual(head('say\nbye'), 'say\nbye');
   });
 
-  it('should return default count of lines, provided no count', () => {
+  it('should return default count of lines or less, provided no count', () => {
     assert.strictEqual(head('hello\nworld\nsay\nbye'), 'hello\nworld\nsay');
     assert.strictEqual(head('hello\nworld'), 'hello\nworld');
   });

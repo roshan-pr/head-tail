@@ -1,16 +1,22 @@
 **TODO**
 
-- [ ] Extract split and join into functions.
-- [ ] Provide the count to the head function.
-- [ ] Use hardcode content, no external input.
+- [ ] Implement count option to head (-n).
+ - [ ] Change the contract of head function.
+- [ ] Move the split, join and constant to separate file
+- [ ] Implement test for headOfLines.
 
 **MAYBE**
 
-- [ ] Consider smaller value for default count.
+- [ ] Consider changing names of headOfLines and head.
 - [ ] Consider data structure for head.
+- [ ] Consider to set default count of line numbers as 10.
 
 **DONE**
 
+- [x] Consider smaller value for default count.
+- [x] Use hardcode content, no external input.
+- [x] Separate '\n' as a constant
+- [x] Extract split and join into functions.
 - [x] Make a headOfLine, returns the number of lines of count.
  - [x] Split the content to multiple lines in head.
 - [x] Make test case for Multiple lines.
