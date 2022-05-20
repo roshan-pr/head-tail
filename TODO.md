@@ -1,14 +1,15 @@
 **TODO**
 
--[ ] Create src and test directory structure.
+- [ ] Make mocha watch.
+- [ ] Investigate `head` utility.
+- [ ] Use hardcode content, no external input.
 
--[ ] Make headLib.js in src.
+**MAYBE**
 
--[ ] Make testHeadLib.js in test.
 
--[ ] Write a test case (happy path).
+**DONE**
 
--[ ] Make mocha watch.
-
--[ ] Investigate `head` utility.
-
+- [x] Write a test case (happy path).
+- [x] Make headLib.js in src.
+- [x] Make testHeadLib.js in test.
+- [x] Create src and test directory structure.
