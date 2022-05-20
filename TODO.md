@@ -1,6 +1,7 @@
 **TODO**
 
 - [ ] Implement headMain taking readFile and options.
+  - [x] Starts headMain with readFile, filename and options.
   - [ ] Arguments to headMain is readFile and options.
   - [ ] Test with mocking function.
 ***

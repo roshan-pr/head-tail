@@ -8,5 +8,11 @@ const head = (content, { delimiter, count = 3 }) => {
   return joinLines(headedContent, delimiter);
 };
 
+const headMain = function (readFile, fileName, options) {
+  const content = readFile(fileName, 'utf8');
+  return head(content, options);
+};
+
 exports.head = head;
+exports.headMain = headMain;
 exports.sliceFromStart = sliceFromStart;
