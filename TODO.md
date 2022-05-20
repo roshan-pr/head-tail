@@ -2,8 +2,7 @@
 
 - [ ] Implement count option to head (-n).
  - [ ] Change the contract of head function.
-- [ ] Move the split, join and constant to separate file
-- [ ] Implement test for headOfLines.
+- [ ] Implement options as a parameter to head.
 
 **MAYBE**
 
@@ -13,6 +12,8 @@
 
 **DONE**
 
+- [x] Move the split, join and constant to separate file
+- [x] Implement test for headOfLines.
 - [x] Consider smaller value for default count.
 - [x] Use hardcode content, no external input.
 - [x] Separate '\n' as a constant
