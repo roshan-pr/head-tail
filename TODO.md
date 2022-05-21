@@ -1,20 +1,25 @@
 **TODO**
 
-- [ ] Consider to set default count of line numbers as 10.
- - [ ] Fix test cases.
+- [ ] Parse the options in headMain 
+- [ ] Extract default form head.js.
+- [ ] Change head contract
 
 ***
 
-- [ ] Implement parseArgs
-  - [ ] Parse the options in headMain extract default form head.js.
+- [ ] Consider Change structure of a general function of splitFromStart.
+ - [ ] Split into separate functions.
+- [ ] Consider to set default count of line numbers as 10.
+ - [ ] Fix test cases.
 - [ ] Make head work for multiple files.
 
 **MAYBE**
 
-- [ ] Consider data structure for head.
+- [ ] Consider different data structure for head.
 
 **DONE**
 
+- [x] Implement parseArgs
+  - [x] Takes arguments and return obj { files: [...], option: {option:'n', value:2}}.
 - [x] Implement try catch block for main in head.js.
 - [x] Implement main in head.js.
   - [x] Use single file from command line `head file`.
