@@ -1,22 +1,23 @@
 **TODO**
 
-- [ ] Implement main in head.js.
-  - [ ] Use single file from command line `head file`.
+- [ ] Consider to set default count of line numbers as 10.
+ - [ ] Fix test cases.
 
 ***
 
 - [ ] Implement parseArgs
-  - [ ] Parse the options in headMain.
-- [ ] Implement try catch block for main in head.js.
+  - [ ] Parse the options in headMain extract default form head.js.
 - [ ] Make head work for multiple files.
 
 **MAYBE**
 
 - [ ] Consider data structure for head.
-- [ ] Consider to set default count of line numbers as 10.
 
 **DONE**
 
+- [x] Implement try catch block for main in head.js.
+- [x] Implement main in head.js.
+  - [x] Use single file from command line `head file`.
 - [x] Implement headMain taking readFile and options.
   - [x] Starts headMain with readFile, filename and options.
   - [x] Arguments to headMain is readFile and options.
