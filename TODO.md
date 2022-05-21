@@ -1,16 +1,13 @@
 **TODO**
 
-- [ ] Implement headMain taking readFile and options.
-  - [x] Starts headMain with readFile, filename and options.
-  - [ ] Arguments to headMain is readFile and options.
-  - [x] Test with mocking readFileSync function.
+- [ ] Implement main in head.js
+  - [ ] Use single file from command line `head file`
+
 ***
 
-- [ ] Implement main in head.js
 - [ ] Implement parseArgs
   - [ ] Parse the options in headMain.
-- [ ] Implement count option to head (-n).
-- [ ] Implement bytes option to head (-c).
+
 
 **MAYBE**
 
@@ -19,6 +16,12 @@
 
 **DONE**
 
+- [x] Implement headMain taking readFile and options.
+  - [x] Starts headMain with readFile, filename and options.
+  - [x] Arguments to headMain is readFile and options.
+  - [x] Test with mocking readFileSync function.
+- [x] Implement count option to head (-n).
+- [x] Implement bytes option to head (-c).
 - [x] Consider changing names of headOfLines ~~~and head~~~.
 - [x] Implement options as a parameter to head.
   - [x] Use objects for sending options.
