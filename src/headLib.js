@@ -8,7 +8,8 @@ const head = (content, { delimiter, count = 3 }) => {
   return joinLines(headedContent, delimiter);
 };
 
-const headMain = function (readFile, fileName, options) {
+const headMain = function (readFile, { ...args }) {
+  const { fileName, options } = args;
   const content = readFile(fileName, 'utf8');
   return head(content, options);
 };

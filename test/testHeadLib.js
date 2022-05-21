@@ -27,6 +27,16 @@ describe('head', () => {
       delimiter: '\n',
     }), 'hello\nworld');
   });
+
+  it('should return characters of bytes count', () => {
+    assert.strictEqual(head('hello', { delimiter: '', count: 2 }), 'he');
+    assert.strictEqual(head('hello', { delimiter: '', count: 4 }), 'hell');
+  });
+
+  it('should return characters, count greater than the content', () => {
+    assert.strictEqual(head('bye', { delimiter: '', count: 4 }), 'bye');
+    assert.strictEqual(head('hello', { delimiter: '', count: 6 }), 'hello');
+  });
 });
 
 describe('sliceFromStart', () => {

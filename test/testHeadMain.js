@@ -15,6 +15,6 @@ describe('headMain', () => {
     const mockedReadFileSync = shouldReturn('./a.txt', 'hello\nworld');
     const options = { delimiter: '\n', count: 1 };
     assert.deepStrictEqual(
-      headMain(mockedReadFileSync, './a.txt', options), 'hello');
+      headMain(mockedReadFileSync, { fileName: './a.txt', options }), 'hello');
   });
 });
