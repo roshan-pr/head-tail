@@ -1,17 +1,24 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 
+const { parseArgs } = require('./parseArgs.js');
+
 const sliceFromStart = (content, count) => content.slice(0, count);
 
-const head = (content, { delimiter, count = 3 }) => {
+const head = (content, { delimiter, count }) => {
   const lines = splitLines(content, delimiter);
   const headedContent = sliceFromStart(lines, count);
   return joinLines(headedContent, delimiter);
 };
 
-const headMain = function (readFile, { ...args }) {
-  const { fileName, options } = args;
-  const content = readFile(fileName, 'utf8');
-  return head(content, options);
+const getDelimiter = (option) => option.name === 'n' ? '\n' : '""';
+
+const headMain = function (readFile, args) {
+  const { files, option } = parseArgs(args);
+  const delimiter = getDelimiter(option);
+  const count = option.value;
+
+  const content = readFile(...files, 'utf8');
+  return head(content, { delimiter, count });
 };
 
 exports.head = head;

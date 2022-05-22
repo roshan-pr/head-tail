@@ -19,15 +19,6 @@ describe('head', () => {
     }), 'say\nbye');
   });
 
-  it('should return default count of lines or provided, with no count', () => {
-    assert.strictEqual(head('hello\nworld\nsay\nbye', {
-      delimiter: '\n',
-    }), 'hello\nworld\nsay');
-    assert.strictEqual(head('hello\nworld', {
-      delimiter: '\n',
-    }), 'hello\nworld');
-  });
-
   it('should return characters of bytes count', () => {
     assert.strictEqual(head('hello', { delimiter: '', count: 2 }), 'he');
     assert.strictEqual(head('hello', { delimiter: '', count: 4 }), 'hell');
