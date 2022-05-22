@@ -1,7 +1,6 @@
 **TODO**
 
-- [ ] Consider Change structure of a general function of splitFromStart.
- - [ ] Split into separate functions.
+- [ ] Validate options, throw error from parser.
 
 ***
 
@@ -10,6 +9,8 @@
 
 **MAYBE**
 
+- [ ] Consider Change structure of a general function of splitFromStart.
+ - [ ] Split into separate functions for line and bytes.
 - [ ] Consider different data structure for head.
 
 **DONE**
