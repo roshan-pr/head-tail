@@ -1,8 +1,11 @@
 **TODO**
 
-- [ ] Validate options, throw error from parser.
+- [ ] Pass console to headMain as a parameter.
 
 ***
+- [ ] Validate options, throw error from parser.
+ - [ ] For option value is zero.
+ - [ ] For invalid option.
 
 
 **MAYBE**

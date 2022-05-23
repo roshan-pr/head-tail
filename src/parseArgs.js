@@ -17,8 +17,18 @@ const parseOption = function (iterator) {
   return { files, option };
 };
 
+const format = function (args) {
+  return args.flatMap(arg => {
+    if (arg.startsWith('-')) {
+      return isFinite(arg.slice(1)) ?
+        [arg[0], arg.slice(1)] : [arg.slice(0, 2), arg.slice(2)];
+    }
+    return arg;
+  }).filter(arg => arg);
+};
+
 const parseArgs = args => {
-  const argsIterator = iterator(args);
+  const argsIterator = iterator(format(args));
   const parsedOption = parseOption.bind({
     files: [], option: { name: 'n', value: 10 }
   });

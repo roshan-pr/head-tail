@@ -27,7 +27,7 @@ const headMain = function (readFile, args) {
     } catch (error) {
       return {
         isError: true,
-        value: `head: ${file}: No such file or directory`
+        value: `head: ${file}: No such file or directory\n`
       };
     }
     const contentHead = head(content, option);

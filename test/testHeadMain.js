@@ -2,12 +2,12 @@ const assert = require('assert');
 
 const { headMain } = require('../src/headLib.js');
 
-const shouldReturn = function (mockFile, content) {
+const shouldReturn = function (mockFiles, contents) {
   let index = 0;
   return (fileName, encoding) => {
-    assert.strictEqual(mockFile[index], fileName);
+    assert.strictEqual(mockFiles[index], fileName);
     assert.strictEqual(encoding, 'utf8');
-    const mockContent = content[index];
+    const mockContent = contents[index];
     index++;
     return mockContent;
   };
