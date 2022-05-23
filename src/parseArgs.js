@@ -4,7 +4,9 @@ const parseOption = function (iterator) {
   const argument = iterator.currentArg();
   const { files, option } = this;
 
-  if (argument.startsWith('-')) {
+  if (files.length > 0) {
+    files.push(argument);
+  } else if (argument.startsWith('-')) {
     option.name = argument[1];
     option.value = +iterator.nextArg();
   } else {

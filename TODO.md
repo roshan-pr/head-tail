@@ -4,8 +4,6 @@
 
 ***
 
-- [ ] Make head work for multiple files.
-- [ ] Change head contract
 
 **MAYBE**
 
@@ -15,6 +13,8 @@
 
 **DONE**
 
+- [x] Make head work for multiple files.
+- [x] Change head contract
 - [x] Extract default form head.js.
 - [x] Parse the option in headMain 
 - [x] Consider to set default count of line numbers as 10.
