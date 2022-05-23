@@ -17,28 +17,26 @@ const head = (content, option) => {
 
 const formatContent = (title, content) => `==> ${title} <==\n` + content;
 
-const headMain = function (readFile, args) {
+const headMain = function (readFile, consoler, args) {
   const { files, option } = parseArgs(args);
 
-  return files.map((file) => {
-    let content;
+  let exitCode = 0;
+  const { error, log } = consoler;
+  files.forEach((file) => {
+    let content = '';
     try {
       content = readFile(file, 'utf8');
-    } catch (error) {
-      return {
-        isError: true,
-        value: `head: ${file}: No such file or directory\n`
-      };
+      let contentHead = head(content, option);
+      if (files.length > 1) {
+        contentHead = `${formatContent(file, contentHead)}`;
+      }
+      log(contentHead);
+    } catch (err) {
+      error(`head: ${file}: No such file or directory\n`);
+      exitCode = 1;
     }
-    const contentHead = head(content, option);
-    if (files.length > 1) {
-      return {
-        isError: false,
-        value: `${formatContent(file, contentHead)}`
-      };
-    }
-    return { isError: false, value: contentHead };
   });
+  return exitCode;
 };
 
 exports.head = head;

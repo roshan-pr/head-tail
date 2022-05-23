@@ -1,11 +1,10 @@
 **TODO**
 
-- [ ] Pass console to headMain as a parameter.
-
-***
 - [ ] Validate options, throw error from parser.
  - [ ] For option value is zero.
  - [ ] For invalid option.
+
+***
 
 
 **MAYBE**
@@ -16,6 +15,7 @@
 
 **DONE**
 
+- [x] Pass console to headMain as a parameter.
 - [x] Make head work for multiple files.
 - [x] Change head contract
 - [x] Extract default form head.js.

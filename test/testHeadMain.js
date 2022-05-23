@@ -13,42 +13,69 @@ const shouldReturn = function (mockFiles, contents) {
   };
 };
 
+const shouldPrint = function (content, expected) {
+  let index = 0;
+  return (actual) => {
+    assert.strictEqual(actual, expected[index], 'In mock print');
+    content.push(actual);
+    index++;
+  };
+};
+
 describe('headMain', () => {
-  it('should give object of a line of given file', () => {
+  it('should display a line of given file', () => {
+    const consoleReport = [];
     const mockedReadFileSync = shouldReturn(['./a.txt'], ['hello\nworld']);
+    const mockedConsole = shouldPrint(consoleReport, ['hello']);
+    const mockedError = shouldPrint(consoleReport, []);
     const args = ['-n', '1', './a.txt'];
-    assert.deepStrictEqual(
-      headMain(mockedReadFileSync, args),
-      [{ isError: false, value: 'hello' }]);
+    assert.deepStrictEqual(headMain(mockedReadFileSync, {
+      log: mockedConsole, error: mockedError
+    }, args), 0);
+    assert.deepStrictEqual(consoleReport, ['hello']);
   });
 
-  it('should give object of lines of given file, no options', () => {
+  it('should display lines of given file, no options provided', () => {
+    const consoleReport = [];
     const mockedReadFileSync = shouldReturn(['./a.txt'], ['b\ny\ne']);
+    const mockedConsole = shouldPrint(consoleReport, ['b\ny\ne']);
+    const mockedError = shouldPrint(consoleReport, []);
     const args = ['./a.txt'];
-    assert.deepStrictEqual(
-      headMain(mockedReadFileSync, args),
-      [{ isError: false, value: 'b\ny\ne' }],
-    );
+    assert.deepStrictEqual(headMain(mockedReadFileSync, {
+      log: mockedConsole, error: mockedError
+    }, args), 0);
+    assert.deepStrictEqual(consoleReport, ['b\ny\ne']);
   });
 
-  it('should give object of lines less than default', () => {
+  it('should display lines of default count, `head ./a.txt`', () => {
+    const consoleReport = [];
     const mockedReadFileSync = shouldReturn(
       ['./a.txt'], ['h\ne\nl\nl\no\nw\no\nr\nl\nd\nb\ny\ne']);
+    const mockedConsole = shouldPrint(consoleReport,
+      ['h\ne\nl\nl\no\nw\no\nr\nl\nd']);
+    const mockedError = shouldPrint(consoleReport, []);
     const args = ['./a.txt'];
     assert.deepStrictEqual(
-      headMain(mockedReadFileSync, args),
-      [{ isError: false, value: 'h\ne\nl\nl\no\nw\no\nr\nl\nd' }],
-    );
+      headMain(mockedReadFileSync, {
+        log: mockedConsole, error: mockedError
+      }, args), 0);
+    assert.deepStrictEqual(consoleReport, ['h\ne\nl\nl\no\nw\no\nr\nl\nd']);
   });
 
   it('should display first counted lines of given files', () => {
-    const mockedReadFileSync = shouldReturn(
-      ['./a.txt', './b.txt'], ['a file content', 'b file content']);
+    const consoleReport = [];
+
+    const mockedReadFileSync = shouldReturn(['./a.txt', './b.txt'],
+      ['content of a', 'content of b']);
+    const mockedConsole = shouldPrint(consoleReport,
+      ['==> ./a.txt <==\ncontent of a', '==> ./b.txt <==\ncontent of b']);
+    const mockedError = shouldPrint(consoleReport, ['====']);
     const args = ['./a.txt', './b.txt'];
-    const expected = [
-      { isError: false, value: '==> ./a.txt <==\na file content' },
-      { isError: false, value: '==> ./b.txt <==\nb file content' }];
-    assert.deepStrictEqual(headMain(mockedReadFileSync, args), expected);
+
+    assert.deepStrictEqual(headMain(mockedReadFileSync,
+      { log: mockedConsole, error: mockedError }, args), 0);
+    assert.deepStrictEqual(consoleReport,
+      ['==> ./a.txt <==\ncontent of a', '==> ./b.txt <==\ncontent of b']);
   });
 
 });
