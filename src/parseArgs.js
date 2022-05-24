@@ -1,20 +1,24 @@
 const { iterator } = require('./iterator.js');
 
+const { groupValidOption } = require('./groupValidateOption.js');
+
+const isEmpty = (array) => array.length === 0;
+
 const parseOption = function (iterator) {
   const argument = iterator.currentArg();
-  const { files, option } = this;
+  const { files, options } = this;
 
   if (files.length > 0) {
     files.push(argument);
   } else if (argument.startsWith('-')) {
-    option.name = argument[1];
-    option.value = +iterator.nextArg();
+    const [option, count] = [argument, iterator.nextArg()];
+    options.push(groupValidOption({ option, count }));
   } else {
     files.push(argument);
   }
 
   iterator.nextArg();
-  return { files, option };
+  return { files: files, options: options };
 };
 
 const splitOptions = function (args) {
@@ -27,17 +31,35 @@ const splitOptions = function (args) {
   }).filter(arg => arg);
 };
 
+const getOption = (options) => {
+  const [firstOption] = [...options];
+  return options.reduce((obj, option) => {
+    if (firstOption.name !== option.name) {
+      throw {
+        name: 'bad option',
+        message: 'can\'t combine line and byte counts'
+      };
+    }
+    return option;
+  }, { firstOption });
+};
+
+const setDefault = () => {
+  return { name: '-n', value: 10 };
+};
+
 const parseArgs = args => {
   const argsIterator = iterator(splitOptions(args));
-  const parsedOption = parseOption.bind({
-    files: [], option: { name: 'n', value: 10 }
-  });
+  const parsedOption = parseOption.bind({ files: [], options: [] });
 
-  let parsedArgs = {};
+  let groupedArgs = {};
   while (argsIterator.hasMoreArg()) {
-    parsedArgs = parsedOption(argsIterator);
+    groupedArgs = parsedOption(argsIterator);
   }
-  return parsedArgs;
+  const option = isEmpty(groupedArgs.options) ? setDefault() :
+    getOption(groupedArgs.options);
+
+  return { files: groupedArgs.files, option };
 };
 
 exports.parseArgs = parseArgs;

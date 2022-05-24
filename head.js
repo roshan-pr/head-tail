@@ -12,7 +12,7 @@ const main = () => {
       stdOut: console.log, stdError: console.error
     }, process.argv.slice(2));
   } catch (error) {
-    // console.log(error.message);
+    console.error('head', error.message);
     console.error('usage: head [-n lines | -c bytes] [file ...]');
   }
   exit(exitCode);

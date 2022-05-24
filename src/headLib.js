@@ -2,7 +2,7 @@ const { splitLines, joinLines } = require('./stringUtils.js');
 
 const { parseArgs } = require('./parseArgs.js');
 
-const getDelimiter = (option) => option.name === 'n' ? '\n' : '';
+const getDelimiter = (option) => option.name === '-n' ? '\n' : '';
 
 const sliceFromStart = (content, count) => content.slice(0, count);
 

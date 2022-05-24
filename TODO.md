@@ -1,11 +1,9 @@
 **TODO**
 
-- [ ] Validate options, throw error from parser.
- - [ ] For option value is zero.
- - [ ] For invalid option.
- - [ ] Throw from parser, catch in head.js
 
 ***
+- [ ] Implement tail.
+- [ ] Add happy path tests for tail.
 
 
 **MAYBE**
@@ -16,6 +14,10 @@
 
 **DONE**
 
+- [x] Validate options, throw error from parser.
+ - [x] For option value is zero.
+ - [x] For invalid option.
+ - [x] Throw from parser, catch in head.js
 - [x] Add exit code to headMain.
 - [x] Pass console to headMain as a parameter.
 - [x] Make head work for multiple files.
