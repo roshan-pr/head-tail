@@ -1,9 +1,10 @@
 **TODO**
 
+- [ ] Edit README.md, add tail contract.
+  - [ ] Create test file for tail.
+  - [ ] Add happy path tests for tail.
 
 ***
-- [ ] Implement tail.
-- [ ] Add happy path tests for tail.
 
 
 **MAYBE**
