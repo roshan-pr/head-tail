@@ -3,6 +3,7 @@
 - [ ] Validate options, throw error from parser.
  - [ ] For option value is zero.
  - [ ] For invalid option.
+ - [ ] Throw from parser, catch in head.js
 
 ***
 
@@ -15,6 +16,7 @@
 
 **DONE**
 
+- [x] Add exit code to headMain.
 - [x] Pass console to headMain as a parameter.
 - [x] Make head work for multiple files.
 - [x] Change head contract

@@ -17,11 +17,10 @@ const head = (content, option) => {
 
 const formatContent = (title, content) => `==> ${title} <==\n` + content;
 
-const headMain = function (readFile, consoler, args) {
+const headMain = function (readFile, logger, args) {
   const { files, option } = parseArgs(args);
 
   let exitCode = 0;
-  const { error, log } = consoler;
   files.forEach((file) => {
     let content = '';
     try {
@@ -30,9 +29,9 @@ const headMain = function (readFile, consoler, args) {
       if (files.length > 1) {
         contentHead = `${formatContent(file, contentHead)}`;
       }
-      log(contentHead);
+      logger.stdOut(contentHead);
     } catch (err) {
-      error(`head: ${file}: No such file or directory\n`);
+      logger.stdError(`head: ${file}: No such file or directory`);
       exitCode = 1;
     }
   });
