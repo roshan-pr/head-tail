@@ -14,6 +14,7 @@
 
 **DONE**
 
+- [ ] Added test for split options.
 - [x] Validate options, throw error from parser.
  - [x] For option value is zero.
  - [x] For invalid option.

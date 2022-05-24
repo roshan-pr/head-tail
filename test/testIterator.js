@@ -21,4 +21,11 @@ describe('iterator', () => {
     const argsIterator = iterator([1]);
     assert.deepStrictEqual(argsIterator.nextArg(), undefined);
   });
+
+  it('should give rest of [1, 2, 3], if currently at index 1', () => {
+    const argsIterator = iterator([1, 2, 3]);
+    assert.deepStrictEqual(argsIterator.nextArg(), 2);
+    assert.deepStrictEqual(argsIterator.restOf(), [2, 3]);
+    assert.deepStrictEqual(argsIterator.currentArg(), undefined);
+  });
 });

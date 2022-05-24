@@ -4,17 +4,17 @@ const { groupValidOption } = require('./groupValidateOption.js');
 
 const isEmpty = (array) => array.length === 0;
 
+const isOption = (argument) => argument.startsWith('-');
+
 const parseOption = function (iterator) {
   const argument = iterator.currentArg();
   const { files, options } = this;
 
-  if (files.length > 0) {
-    files.push(argument);
-  } else if (argument.startsWith('-')) {
+  if (isOption(argument)) {
     const [option, count] = [argument, iterator.nextArg()];
     options.push(groupValidOption({ option, count }));
   } else {
-    files.push(argument);
+    files.push(...iterator.restOf());
   }
 
   iterator.nextArg();
@@ -23,9 +23,9 @@ const parseOption = function (iterator) {
 
 const splitOptions = function (args) {
   return args.flatMap(arg => {
-    if (arg.startsWith('-')) {
+    if (isOption(arg)) {
       return isFinite(arg.slice(1)) ?
-        [arg[0], arg.slice(1)] : [arg.slice(0, 2), arg.slice(2)];
+        ['-', arg.slice(1)] : [arg.slice(0, 2), arg.slice(2)];
     }
     return arg;
   }).filter(arg => arg);
@@ -34,14 +34,14 @@ const splitOptions = function (args) {
 const getOption = (options) => {
   const [firstOption] = [...options];
   return options.reduce((obj, option) => {
-    if (firstOption.name !== option.name) {
+    if (obj.name !== option.name) {
       throw {
         name: 'bad option',
         message: 'can\'t combine line and byte counts'
       };
     }
     return option;
-  }, { firstOption });
+  }, { ...firstOption });
 };
 
 const setDefault = () => {
@@ -62,4 +62,5 @@ const parseArgs = args => {
   return { files: groupedArgs.files, option };
 };
 
+exports.splitOptions = splitOptions;
 exports.parseArgs = parseArgs;

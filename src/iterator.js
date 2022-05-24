@@ -13,10 +13,17 @@ const iterator = function (args) {
     return args[index];
   };
 
+  const restOf = function () {
+    const rest = args.slice(index);
+    index = args.length;
+    return rest;
+  };
+
   return {
     nextArg: nextArg,
     currentArg: currentArg,
-    hasMoreArg: hasMoreArg
+    hasMoreArg: hasMoreArg,
+    restOf: restOf
   };
 };
 

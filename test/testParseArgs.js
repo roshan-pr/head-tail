@@ -31,4 +31,10 @@ describe('parseArgs', () => {
       ['-n', '2', 'file1', 'file2']), {
       files: ['file1', 'file2'], option: { name: '-n', value: 2 }
     }));
+
+  it('should parse last valid option files', () =>
+    assert.deepStrictEqual(parseArgs(
+      ['-n', '2', '-n', '3', 'file1']), {
+      files: ['file1'], option: { name: '-n', value: 3 }
+    }));
 });
