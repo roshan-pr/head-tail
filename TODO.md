@@ -1,21 +1,28 @@
-**TODO**
+## **-- TAIL --**
 
+**TODO**
 - [ ] Edit README.md, add tail contract.
   - [ ] Create test file for tail.
   - [ ] Add happy path tests for tail.
 
 ***
+***
 
+## **-- HEAD --**
 
-**MAYBE**
+**TODO**
 
 - [ ] Consider Change structure of a general function of splitFromStart.
  - [ ] Split into separate functions for line and bytes.
+- [ ] Change contract for string utils.
+
+**MAYBE**
+
 - [ ] Consider different data structure for head.
 
 **DONE**
 
-- [ ] Added test for split options.
+- [x] Added test for split options.
 - [x] Validate options, throw error from parser.
  - [x] For option value is zero.
  - [x] For invalid option.
