@@ -1,9 +1,15 @@
 ## **-- TAIL --**
 
 **TODO**
-- [ ] Edit README.md, add tail contract.
-  - [ ] Create test file for tail.
-  - [ ] Add happy path tests for tail.
+
+- [ ] Make tail work for multiple lines.
+- [ ] Add last n lines and last n characters.
+
+**DONE**
+
+- [x] Add happy path tests for tail.
+- [x] Create test file for tail.
+- [x] Edit README.md, add tail contract.
 
 ***
 ***
