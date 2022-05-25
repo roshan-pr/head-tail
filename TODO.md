@@ -2,15 +2,19 @@
 
 **TODO**
 
-- [ ] Segregate tailMain from tail.
-- [ ] Parameterize tailMain with read file, logger and args.
- - [ ] Mock external functions.
+- [ ] Provide args to tailMain from tail.js.
+- [ ] Make tail work for multiple files.
 
 **MAYBE**
 - [ ] Rename character to bytes in function name.
 
 **DONE**
 
+- [x] Segregate tailMain from tail.
+- [x] Change contract of tail, tail take content and options as parameters.
+- [x] Parameterize tailMain with read file, logger and args.
+ - [x] Mock external functions.
+- [x] Make use of parseArgs functionality.
 - [x] Make tail work for multiple lines.
 - [x] Add last n lines and last n characters.
 - [x] Add happy path tests for tail.

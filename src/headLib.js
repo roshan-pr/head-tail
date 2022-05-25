@@ -26,14 +26,13 @@ const headMain = function (readFile, logger, args) {
 
   let exitCode = 0;
   files.forEach((file) => {
-    let content = '';
     try {
-      content = readFile(file, 'utf8');
-      let contentHead = head(content, option);
+      const content = readFile(file, 'utf8');
+      let headContent = head(content, option);
       if (files.length > 1) {
-        contentHead = `${formatContent(file, contentHead)}`;
+        headContent = `${formatContent(file, headContent)}`;
       }
-      logger.stdOut(contentHead);
+      logger.stdOut(headContent);
     } catch (err) {
       logger.stdError(`head: ${file}: No such file or directory`);
       exitCode = 1;

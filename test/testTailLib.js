@@ -6,13 +6,13 @@ const assert = require('assert');
 
 describe('tail', () => {
   it('should return given content', () => {
-    assert.strictEqual(tail('hello'), 'hello');
-    assert.strictEqual(tail('world'), 'world');
+    assert.strictEqual(tail('hello', { name: '-n', value: 10 }), 'hello');
+    assert.strictEqual(tail('world', { name: '-n', value: 10 }), 'world');
   });
 
   it('should return default count lines, if more lines provided', () => {
-    assert.strictEqual(tail(
-      'h\ne\nl\nl\no\nw\no\nr\nl\nd\nb\ny\ne'), 'l\no\nw\no\nr\nl\nd\nb\ny\ne');
+    assert.strictEqual(tail('h\ne\nl\nl\no\nw\no\nr\nl\nd\nb\ny\ne',
+      { name: '-n', value: 10 }), 'l\no\nw\no\nr\nl\nd\nb\ny\ne');
   });
 });
 
