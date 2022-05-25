@@ -2,13 +2,14 @@
 
 **TODO**
 
-- [ ] Make tail work for multiple files.
+- [ ] Accept options starting from '+'.
 
 **MAYBE**
 - [ ] Rename character to bytes in function name.
 
 **DONE**
 
+- [x] Make tail work for multiple files.
 - [x] Provide args to tailMain from tail.js.
 - [x] Segregate tailMain from tail.
 - [x] Change contract of tail, tail take content and options as parameters.
@@ -33,6 +34,7 @@
 **MAYBE**
 
 - [ ] Consider different data structure for head.
+- [ ] Extract files handling separate, in head main.
 
 **DONE**
 

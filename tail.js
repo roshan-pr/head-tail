@@ -11,8 +11,8 @@ const main = () => {
     exitCode = tailMain(fs.readFileSync,
       { stdOut: console.log, stdError: console.error }, process.argv.slice(2));
   } catch (error) {
-    console.error('head', error.message);
-    console.log('usage: tail [-c # | -n #] [file ...]');
+    console.error('tail:', error.message);
+    console.log('usage: tail [-r] [-q] [-c # | -n #] [file ...]');
   }
   exit(exitCode);
 };

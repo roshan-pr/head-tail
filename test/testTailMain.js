@@ -22,18 +22,37 @@ const shouldPrint = function (content, expected) {
   };
 };
 
-describe('headMain', () => {
+describe('tailMain', () => {
   it('should display a line of given file', () => {
     const consoleReport = [];
-    const mockedReadFileSync = shouldReturn([{
-      name: './a.txt', content: 'hello\nworld'
-    }]);
+    const mockedReadFileSync = shouldReturn([
+      { name: './a.txt', content: 'hello\nworld' }]);
 
     const expectedOutput = ['world'];
     const mockedConsole = shouldPrint(consoleReport, expectedOutput);
     const mockedError = shouldPrint(consoleReport, []);
 
     const args = ['-n', '1', './a.txt'];
+    const logger = { stdOut: mockedConsole, stdError: mockedError };
+
+    assert.deepStrictEqual(tailMain(
+      mockedReadFileSync, logger, args), 0);
+  });
+
+  it('should display a characters of given files', () => {
+    const consoleReport = [];
+    const mockedReadFileSync = shouldReturn([
+      { name: './a.txt', content: 'hello\nworld' },
+      { name: './b.txt', content: 'say\nbye' }]);
+
+    const expectedOutput = [];
+    expectedOutput.push('==> ./a.txt <==\nrld');
+    expectedOutput.push('==> ./b.txt <==\nbye');
+
+    const mockedConsole = shouldPrint(consoleReport, expectedOutput);
+    const mockedError = shouldPrint(consoleReport, []);
+
+    const args = ['-c', '3', './a.txt', './b.txt'];
     const logger = { stdOut: mockedConsole, stdError: mockedError };
 
     assert.deepStrictEqual(tailMain(

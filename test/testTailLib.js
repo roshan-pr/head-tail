@@ -5,9 +5,14 @@ const { lastNChars, lastNLines } = require('../src/tailLib.js');
 const assert = require('assert');
 
 describe('tail', () => {
-  it('should return given content', () => {
+  it('should return given content, when content less than default', () => {
     assert.strictEqual(tail('hello', { name: '-n', value: 10 }), 'hello');
     assert.strictEqual(tail('world', { name: '-n', value: 10 }), 'world');
+  });
+
+  it('should return given content, when content less than default ', () => {
+    assert.strictEqual(tail('hello', { name: '-c', value: 6 }), 'hello');
+    assert.strictEqual(tail('world', { name: '-c', value: 7 }), 'world');
   });
 
   it('should return default count lines, if more lines provided', () => {
