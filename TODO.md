@@ -2,11 +2,17 @@
 
 **TODO**
 
-- [ ] Make tail work for multiple lines.
-- [ ] Add last n lines and last n characters.
+- [ ] Segregate tailMain from tail.
+- [ ] Parameterize tailMain with read file, logger and args.
+ - [ ] Mock external functions.
+
+**MAYBE**
+- [ ] Rename character to bytes in function name.
 
 **DONE**
 
+- [x] Make tail work for multiple lines.
+- [x] Add last n lines and last n characters.
 - [x] Add happy path tests for tail.
 - [x] Create test file for tail.
 - [x] Edit README.md, add tail contract.
@@ -18,6 +24,7 @@
 
 **TODO**
 
+- [ ] Refactor headMain, separate each file processing and log the report.
 
 **MAYBE**
 
