@@ -3,21 +3,25 @@ const assert = require('assert');
 const { splitLines, joinLines } = require('../src/stringUtils.js');
 
 describe('splitLines', () => {
-  it('should split with content delimiter ""', () => {
-    assert.deepStrictEqual(splitLines('hello', ''), ['h', 'e', 'l', 'l', 'o']);
-    assert.deepStrictEqual(splitLines('a\nb', ''), ['a', '\n', 'b']);
+  it('should give line, provided single line', () => {
+    assert.deepStrictEqual(splitLines('hello'), ['hello']);
+    assert.deepStrictEqual(splitLines('bye'), ['bye']);
   });
 
-  it('should split with content delimiter \n', () =>
-    assert.deepStrictEqual(splitLines('say\nbye', '\n'), ['say', 'bye']));
+  it('should split multiple lines', () => {
+    assert.deepStrictEqual(splitLines('hello\nworld', '\n'), ['hello', 'world']);
+    assert.deepStrictEqual(splitLines('say\nbye', '\n'), ['say', 'bye']);
+  });
 });
 
 describe('joinLines', () => {
-  it('should join content with delimiter ""', () => {
-    assert.deepStrictEqual(joinLines(['h', 'e', 'l', 'l', 'o'], ''), 'hello');
-    assert.deepStrictEqual(joinLines(['a', '\n', 'b'], ''), 'a\nb');
+  it('should join content of single line', () => {
+    assert.deepStrictEqual(joinLines(['hello']), 'hello');
+    assert.deepStrictEqual(joinLines(['bye']), 'bye');
   });
 
-  it('should join content with delimiter \n', () =>
-    assert.deepStrictEqual(joinLines(['say', 'bye'], '\n'), 'say\nbye'));
+  it('should join multiple lines', () => {
+    assert.deepStrictEqual(joinLines(['hello', 'world']), 'hello\nworld');
+    assert.deepStrictEqual(joinLines(['say', 'bye']), 'say\nbye');
+  });
 });
