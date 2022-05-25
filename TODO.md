@@ -2,7 +2,6 @@
 
 **TODO**
 
-- [ ] Provide args to tailMain from tail.js.
 - [ ] Make tail work for multiple files.
 
 **MAYBE**
@@ -10,6 +9,7 @@
 
 **DONE**
 
+- [x] Provide args to tailMain from tail.js.
 - [x] Segregate tailMain from tail.
 - [x] Change contract of tail, tail take content and options as parameters.
 - [x] Parameterize tailMain with read file, logger and args.
