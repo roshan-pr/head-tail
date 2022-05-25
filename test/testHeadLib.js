@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const { head, sliceFromStart } = require('../src/headLib.js');
+const { head, firstNChars, firstNLines } = require('../src/headLib.js');
 
 describe('head', () => {
   it('should return a single line', () => {
@@ -9,14 +9,10 @@ describe('head', () => {
   });
 
   it('should return multiple lines', () => {
-    assert.strictEqual(head('hello\nworld', {
-      name: '-n',
-      value: 2
-    }), 'hello\nworld');
-    assert.strictEqual(head('say\nbye', {
-      name: '-n',
-      value: 2
-    }), 'say\nbye');
+    assert.strictEqual(head('hello\nworld',
+      { name: '-n', value: 2 }), 'hello\nworld');
+    assert.strictEqual(head('say\nbye',
+      { name: '-n', value: 2 }), 'say\nbye');
   });
 
   it('should return characters of bytes count', () => {
@@ -30,15 +26,26 @@ describe('head', () => {
   });
 });
 
-describe('sliceFromStart', () => {
-  it('should give lines of provided count', () =>
-    assert.deepStrictEqual(sliceFromStart(['hello', 'world'], 1), ['hello']));
-  assert.deepStrictEqual(
-    sliceFromStart(['hello', 'world'], 2), ['hello', 'world']);
+describe('firstNChars', () => {
+  it('should give first N characters of given content', () => {
+    assert.strictEqual(firstNChars('hello', 3), 'hel');
+    assert.strictEqual(firstNChars('world', 2), 'wo');
+  });
 
-  it('should give lines, even count greater than number of lines', () =>
-    assert.deepStrictEqual(
-      sliceFromStart(['hello'], 2), ['hello']));
-  assert.deepStrictEqual(
-    sliceFromStart(['hello', 'world'], 3), ['hello', 'world']);
+  it('should return given content, if count is greater', () => {
+    assert.strictEqual(firstNChars('say', 4), 'say');
+    assert.strictEqual(firstNChars('bye', 6), 'bye');
+  });
+});
+
+describe('firstNLines', () => {
+  it('should give a N lines', () => {
+    assert.strictEqual(firstNLines('hello\nworld', 1), 'hello');
+    assert.strictEqual(firstNLines('say\nbye\nto', 2), 'say\nbye');
+  });
+
+  it('should return given lines, if count is greater', () => {
+    assert.strictEqual(firstNLines('hello', 3), 'hello');
+    assert.strictEqual(firstNLines('bye', 2), 'bye');
+  });
 });

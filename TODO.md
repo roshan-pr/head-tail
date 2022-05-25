@@ -12,9 +12,6 @@
 
 **TODO**
 
-- [ ] Consider Change structure of a general function of splitFromStart.
- - [ ] Split into separate functions for line and bytes.
-- [ ] Change contract for string utils.
 
 **MAYBE**
 
@@ -22,6 +19,9 @@
 
 **DONE**
 
+- [x] Consider Change structure of a general function of splitFromStart.
+ - [x] Split into separate functions for line and bytes.
+- [x] Change contract for string utils.
 - [x] Added test for split options.
 - [x] Validate options, throw error from parser.
  - [x] For option value is zero.

@@ -2,20 +2,24 @@ const { splitLines, joinLines } = require('./stringUtils.js');
 
 const { parseArgs } = require('./parseArgs.js');
 
-const getDelimiter = (option) => option.name === '-n' ? '\n' : '';
-
-const sliceFromStart = (content, count) => content.slice(0, count);
-
-const head = (content, option) => {
-  const delimiter = getDelimiter(option);
-  const count = option.value;
-
-  const lines = splitLines(content, delimiter);
-  const headedContent = sliceFromStart(lines, count);
-  return joinLines(headedContent, delimiter);
-};
+const firstNChars = (content, count) => content.slice(0, count);
 
 const formatContent = (title, content) => `==> ${title} <==\n` + content;
+
+const firstNLines = (content, count) => {
+  const lines = splitLines(content);
+  return joinLines(lines.slice(0, count));
+};
+
+const getFunctionToCall = (option) =>
+  option.name === '-n' ? firstNLines : firstNChars;
+
+const head = (content, option) => {
+  const funcToCall = getFunctionToCall(option);
+
+  const count = option.value;
+  return funcToCall(content, count);
+};
 
 const headMain = function (readFile, logger, args) {
   const { files, option } = parseArgs(args);
@@ -40,4 +44,5 @@ const headMain = function (readFile, logger, args) {
 
 exports.head = head;
 exports.headMain = headMain;
-exports.sliceFromStart = sliceFromStart;
+exports.firstNLines = firstNLines;
+exports.firstNChars = firstNChars;
