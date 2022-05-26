@@ -36,8 +36,7 @@ const getOption = (options) => {
   return options.reduce((obj, option) => {
     if (obj.name !== option.name) {
       throw {
-        name: 'bad option',
-        message: 'can\'t combine line and byte counts'
+        name: 'invalid options', message: 'can\'t combine line and byte counts'
       };
     }
     return option;

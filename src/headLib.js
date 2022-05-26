@@ -11,13 +11,12 @@ const firstNLines = (content, count) => {
   return joinLines(lines.slice(0, count));
 };
 
-const getFunctionToCall = (option) =>
+const getHeadFilter = (option) =>
   option.name === '-n' ? firstNLines : firstNChars;
 
 const head = (content, option) => {
-  const funcToCall = getFunctionToCall(option);
-  const count = option.value;
-  return funcToCall(content, count);
+  const filterHead = getHeadFilter(option);
+  return filterHead(content, option.value);
 };
 
 const headMain = function (readFile, logger, args) {
