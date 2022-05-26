@@ -16,7 +16,6 @@ const getFunctionToCall = (option) =>
 
 const head = (content, option) => {
   const funcToCall = getFunctionToCall(option);
-
   const count = option.value;
   return funcToCall(content, count);
 };

@@ -1,6 +1,4 @@
-const { tail } = require('../src/tailLib.js');
-
-const { lastNChars, lastNLines } = require('../src/tailLib.js');
+const { tail, lastNChars, lastNLines } = require('../src/tailLib.js');
 
 const assert = require('assert');
 

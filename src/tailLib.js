@@ -4,7 +4,12 @@ const { splitLines, joinLines } = require('./stringUtils.js');
 
 const getHeader = (title) => `==> ${title} <==\n`;
 
-const isMoreThanOne = (elements) => elements.length > 1;
+const getFormatter = (elements) => {
+  if (elements.length > 1) {
+    return (report) => getHeader(report.file) + report.content;
+  }
+  return (report) => report.content;
+};
 
 const lastNLines = (content, count) => {
   const lines = splitLines(content);
@@ -14,52 +19,39 @@ const lastNLines = (content, count) => {
 const lastNChars = (content, count) => content.slice(-count);
 
 const tail = (content, option) => {
-  const fnToCall = option.name === '-n' ? lastNLines : lastNChars;
-  return fnToCall(content, option.value);
+  const tailFilter = option.name === '-n' ? lastNLines : lastNChars;
+  return tailFilter(content, option.value);
 };
 
-const processFiles = (readFile, args) => {
-  const { files, option } = args;
+const processFile = (file, option, readFile) => {
+  const result = { file };
 
-  return files.map((file) => {
-    const tailContent = { isError: false };
-    try {
-      const content = readFile(file, 'utf8');
-      tailContent.content = tail(content, option);
-      tailContent.header = getHeader(file);
-    } catch (error) {
-      tailContent.isError = true;
-      tailContent.error = {
-        name: 'FileReadError',
-        message: `${file}: No such file or directory`,
-        fileName: file
-      };
-    }
-    return tailContent;
-  });
+  try {
+    const content = readFile(file, 'utf8');
+    result.content = tail(content, option);
+  } catch (error) {
+    result.error = {
+      name: 'FileReadError', message: `${file}: No such file or directory`,
+    };
+  }
+  return result;
 };
 
-const displayMessage = (logger, report) => {
-  let exitCode = 0;
-  report.forEach(tail => {
-    if (tail.isError) {
-      logger.stdError('tail:', tail.error.message);
-      exitCode = 1;
-    }
-    if (isMoreThanOne(report)) {
-      logger.stdOut(`${tail.header}${tail.content}`);
-    } else {
-      logger.stdOut(tail.content);
-    }
-  });
-  return exitCode;
+const displayMsg = (report, logger, formatter) => {
+  if (report.error) {
+    logger.stdError('tail: ' + report.error.message);
+  }
+  logger.stdOut(formatter(report));
 };
 
 const tailMain = (readFile, logger, args) => {
-  const parsedArgs = parseArgs(args);
+  const { files, option } = parseArgs(args);
 
-  const tails = processFiles(readFile, parsedArgs);
-  return displayMessage(logger, tails);
+  const tailReports = files.map((file) => processFile(file, option, readFile));
+  const formatter = getFormatter(tailReports);
+
+  tailReports.forEach((report) => displayMsg(report, logger, formatter));
+  return 0;
 };
 
 exports.tail = tail;

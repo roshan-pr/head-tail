@@ -2,6 +2,7 @@
 
 **TODO**
 
+- [ ] Handle options in parser, return the files and options(with its properties).
 - [ ] Accept options starting from '+'.
 
 **MAYBE**

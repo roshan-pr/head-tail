@@ -1,5 +1,4 @@
 const assert = require('assert');
-
 const { headMain } = require('../src/headLib.js');
 
 const shouldReturn = function (mockFiles) {
