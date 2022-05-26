@@ -73,6 +73,6 @@ describe('tailMain', () => {
     const logger = { stdOut: mockedConsole, stdError: mockedError };
 
     assert.deepStrictEqual(tailMain(
-      mockedReadFileSync, logger, args), 0);
+      mockedReadFileSync, logger, args), 1);
   });
 });

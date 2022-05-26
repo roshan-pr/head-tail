@@ -44,6 +44,8 @@ const displayMsg = (report, logger, formatter) => {
   logger.stdOut(formatter(report));
 };
 
+const getExitCode = (reports) => reports.some((report) => report.error) ? 1 : 0;
+
 const tailMain = (readFile, logger, args) => {
   const { files, option } = parseArgs(args);
 
@@ -51,7 +53,7 @@ const tailMain = (readFile, logger, args) => {
   const formatter = getFormatter(tailReports);
 
   tailReports.forEach((report) => displayMsg(report, logger, formatter));
-  return 0;
+  return getExitCode(tailReports);
 };
 
 exports.tail = tail;
