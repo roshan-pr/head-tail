@@ -33,14 +33,14 @@ const headOfFile = (file, option, readFile) => {
   return result;
 };
 
-const getFormatter = (elements) => {
-  if (elements.length > 1) {
+const getFormatter = (reports) => {
+  if (reports.length > 1) {
     return (report) => createHeader(report.file) + report.content;
   }
   return (report) => report.content;
 };
 
-const printResult = (report, logger, formatter) => {
+const print = (report, logger, formatter) => {
   if (report.error) {
     logger.stdError(report.error);
     return;
@@ -48,14 +48,16 @@ const printResult = (report, logger, formatter) => {
   logger.stdOut(formatter(report));
 };
 
+const printResult = (headReports, logger) => {
+  const formatter = getFormatter(headReports);
+  headReports.forEach((report) => print(report, logger, formatter));
+};
+
 const headMain = function (readFile, logger, args) {
   const { files, option } = parseArgs(args);
+  const headReports = files.map((file) => headOfFile(file, option, readFile));
 
-  const headReports = files.map((file) =>
-    headOfFile(file, option, readFile));
-  const formatter = getFormatter(headReports);
-  headReports.forEach((report) =>
-    printResult(report, logger, formatter));
+  printResult(headReports, logger);
   return getExitCode(headReports);
 };
 

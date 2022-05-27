@@ -21,14 +21,19 @@ const parseOption = function (iterator) {
   return { files: files, options: options };
 };
 
-const splitOptions = function (args) {
-  return args.flatMap(arg => {
-    if (isOption(arg)) {
-      return isFinite(arg.slice(1)) ?
-        ['-', arg.slice(1)] : [arg.slice(0, 2), arg.slice(2)];
-    }
-    return arg;
-  }).filter(arg => arg);
+const splitAt = (arg, pos) => [arg.slice(0, pos), arg.slice(pos)];
+
+const isNumericOption = (arg) => isFinite(arg);
+
+const splitArg = arg => {
+  if (isOption(arg)) {
+    return isNumericOption(arg) ? [splitAt(arg, 1)] : splitAt(arg, 2);
+  }
+  return arg;
+};
+
+const splitCmdArgs = function (args) {
+  return args.flatMap(splitArg).filter(arg => arg);
 };
 
 const getOption = (options) => {
@@ -48,7 +53,7 @@ const setDefault = () => {
 };
 
 const parseArgs = args => {
-  const argsIterator = iterator(splitOptions(args));
+  const argsIterator = iterator(splitCmdArgs(args));
   const parsedOption = parseOption.bind({ files: [], options: [] });
 
   let groupedArgs = {};
@@ -61,5 +66,5 @@ const parseArgs = args => {
   return { files: groupedArgs.files, option };
 };
 
-exports.splitOptions = splitOptions;
+exports.splitOptions = splitCmdArgs;
 exports.parseArgs = parseArgs;
