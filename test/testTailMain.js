@@ -37,6 +37,7 @@ describe('tailMain', () => {
 
     assert.deepStrictEqual(tailMain(
       mockedReadFileSync, logger, args), 0);
+    assert.deepStrictEqual(consoleReport, expectedOutput);
   });
 
   it('should display a characters of given files', () => {
@@ -57,14 +58,15 @@ describe('tailMain', () => {
 
     assert.deepStrictEqual(tailMain(
       mockedReadFileSync, logger, args), 0);
+    assert.deepStrictEqual(consoleReport, expectedOutput);
   });
 
-  it('should display error for bad file', () => {
+  it('should display error for wrong file', () => {
     const consoleReport = [];
     const mockedReadFileSync = shouldReturn([]);
 
     const expectedError = [];
-    expectedError.push('./a.txt: No such file or directory');
+    expectedError.push('tail: ./a.txt: No such file or directory');
 
     const mockedConsole = shouldPrint(consoleReport, []);
     const mockedError = shouldPrint(consoleReport, ['tail: ./a.txt: No such file or directory']);
@@ -74,5 +76,29 @@ describe('tailMain', () => {
 
     assert.deepStrictEqual(tailMain(
       mockedReadFileSync, logger, args), 1);
+    assert.deepStrictEqual(consoleReport, expectedError);
+
+  });
+
+  it('should display error, providing file and wrong file', () => {
+    const consoleReport = [];
+    const mockedReadFileSync = shouldReturn([{
+      name: './a.txt', content: 'content in a.txt'
+    }]);
+
+    const expectedOutput = [];
+    expectedOutput.push('==> ./a.txt <==\ncontent in a.txt');
+    const expectedError = [];
+    expectedError.push('tail: ./b.txt: No such file or directory');
+
+    const mockedConsole = shouldPrint(consoleReport, expectedOutput);
+    const mockedError = shouldPrint(consoleReport, expectedError);
+
+    const args = ['-n', '1', './a.txt', './b.txt'];
+    const logger = { stdOut: mockedConsole, stdError: mockedError };
+
+    assert.deepStrictEqual(tailMain(
+      mockedReadFileSync, logger, args), 1);
+    assert.deepStrictEqual(consoleReport, [...expectedOutput, ...expectedError]);
   });
 });

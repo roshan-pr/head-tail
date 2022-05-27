@@ -31,15 +31,17 @@
 
 - **TODO**
 
-  - [ ] Refactor headMain, separate each file processing and log the report.
+  - [ ] Change the contract of head, pass the strategy function reference to head.
+  - [ ] Consider different data structure for head.
+  - [ ] Implement tests for headOfFile and printResult.
 
 - **MAYBE**
 
-  - [ ] ~~~Consider different data structure for head.~~~
   - [ ] Extract files handling separate, in head main.
 
 - **DONE**
 
+  - [x] Refactor headMain, separate each file processing and log the report.
   - [x] Consider Change structure of a general function of splitFromStart.
   - [x] Split into separate functions for line and bytes.
   - [x] Change contract for string utils.

@@ -4,7 +4,7 @@ const { parseArgs } = require('./parseArgs.js');
 
 const firstNChars = (content, count) => content.slice(0, count);
 
-const formatContent = (title, content) => `==> ${title} <==\n` + content;
+const createHeader = (title) => `==> ${title} <==\n`;
 
 const firstNLines = (content, count) => {
   const lines = splitLines(content);
@@ -19,27 +19,48 @@ const head = (content, option) => {
   return filterHead(content, option.value);
 };
 
+const getExitCode = (reports) =>
+  reports.some((report) => report.error) ? 1 : 0;
+
+const headOfFile = (file, option, readFile) => {
+  const result = { file };
+  try {
+    const content = readFile(file, 'utf8');
+    result.content = head(content, option);
+  } catch (err) {
+    result.error = `head: ${file}: No such file or directory`;
+  }
+  return result;
+};
+
+const getFormatter = (elements) => {
+  if (elements.length > 1) {
+    return (report) => createHeader(report.file) + report.content;
+  }
+  return (report) => report.content;
+};
+
+const printResult = (report, logger, formatter) => {
+  if (report.error) {
+    logger.stdError(report.error);
+    return;
+  }
+  logger.stdOut(formatter(report));
+};
+
 const headMain = function (readFile, logger, args) {
   const { files, option } = parseArgs(args);
 
-  let exitCode = 0;
-  files.forEach((file) => {
-    try {
-      const content = readFile(file, 'utf8');
-      let headContent = head(content, option);
-      if (files.length > 1) {
-        headContent = `${formatContent(file, headContent)}`;
-      }
-      logger.stdOut(headContent);
-    } catch (err) {
-      logger.stdError(`head: ${file}: No such file or directory`);
-      exitCode = 1;
-    }
-  });
-  return exitCode;
+  const headReports = files.map((file) =>
+    headOfFile(file, option, readFile));
+  const formatter = getFormatter(headReports);
+  headReports.forEach((report) =>
+    printResult(report, logger, formatter));
+  return getExitCode(headReports);
 };
 
 exports.head = head;
 exports.headMain = headMain;
 exports.firstNLines = firstNLines;
 exports.firstNChars = firstNChars;
+exports.printResult = printResult;

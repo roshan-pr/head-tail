@@ -2,11 +2,11 @@ const { parseArgs } = require('./parseArgs.js');
 
 const { splitLines, joinLines } = require('./stringUtils.js');
 
-const getHeader = (title) => `==> ${title} <==\n`;
+const createHeader = (title) => `==> ${title} <==\n`;
 
 const getFormatter = (elements) => {
   if (elements.length > 1) {
-    return (report) => getHeader(report.file) + report.content;
+    return (report) => createHeader(report.file) + report.content;
   }
   return (report) => report.content;
 };
@@ -40,6 +40,7 @@ const processFile = (file, option, readFile) => {
 const displayMsg = (report, logger, formatter) => {
   if (report.error) {
     logger.stdError('tail: ' + report.error.message);
+    return;
   }
   logger.stdOut(formatter(report));
 };
