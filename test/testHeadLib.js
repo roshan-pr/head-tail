@@ -1,6 +1,7 @@
 const assert = require('assert');
 
-const { head, firstNChars, firstNLines } = require('../src/headLib.js');
+const { head, firstNChars, firstNLines, printResult, headOfFile } = require('../src/headLib.js');
+const { mockConsole, mockReadFileSync } = require('./mockFunctions.js');
 
 describe('head', () => {
   it('should return a single line', () => {
@@ -47,5 +48,62 @@ describe('firstNLines', () => {
   it('should return given lines, if count is greater', () => {
     assert.strictEqual(firstNLines('hello', 3), 'hello');
     assert.strictEqual(firstNLines('bye', 2), 'bye');
+  });
+});
+
+describe('printResult', () => {
+  it('Should display the report, without any error', () => {
+    const consoleReport = [];
+    const report = [{ file: './a.txt', content: 'content of a.txt' }];
+
+    const expectedOutput = ['content of a.txt'];
+    const mockedLog = mockConsole(consoleReport, expectedOutput);
+    const mockedError = mockConsole(consoleReport, []);
+
+    const logger = { stdError: mockedError, stdOut: mockedLog };
+    assert.deepStrictEqual(printResult(report, logger), undefined);
+    assert.deepStrictEqual(consoleReport, expectedOutput);
+  });
+
+  it('Should display the report, with an error', () => {
+    const consoleReport = [];
+    const report = [
+      { file: './b.txt', error: './b.txt: No such file or directory' }
+    ];
+
+    const expectedOutput = [];
+    const mockedLog = mockConsole(consoleReport, expectedOutput);
+    const expectedError = ['./b.txt: No such file or directory'];
+    const mockedError = mockConsole(consoleReport, expectedError);
+
+    const logger = { stdError: mockedError, stdOut: mockedLog };
+    assert.deepStrictEqual(printResult(report, logger), undefined);
+    assert.deepStrictEqual(consoleReport, expectedError);
+  });
+});
+
+describe('headOfFile', () => {
+  it('Should give the head content of a file', () => {
+    const readFile = mockReadFileSync([{
+      name: './a.txt', content: 'content of ./a.txt'
+    }]);
+    const file = './a.txt';
+    const option = { name: '-n', value: 2 };
+
+    const expected = { file: './a.txt', content: 'content of ./a.txt' };
+    assert.deepStrictEqual(headOfFile(file, option, readFile), expected);
+  });
+
+  it('Should give error, file not present', () => {
+    const readFile = mockReadFileSync([{
+      name: './a.txt', error: './a.txt: No such file or directory'
+    }]);
+    const file = './a.txt';
+    const option = { name: '-n', value: 2 };
+
+    const expected = {
+      file: './a.txt', error: 'head: ./a.txt: No such file or directory'
+    };
+    assert.deepStrictEqual(headOfFile(file, option, readFile), expected);
   });
 });

@@ -33,12 +33,12 @@ const headOfFile = (file, option, readFile) => {
   return result;
 };
 
-const getFormatter = (reports) => {
-  if (reports.length > 1) {
-    return (report) => createHeader(report.file) + report.content;
-  }
-  return (report) => report.content;
-};
+const appendHeader = ({ file, content }) => createHeader(file) + content;
+
+const getContent = ({ content }) => content;
+
+const getFormatter = (reports) =>
+  reports.length > 1 ? appendHeader : getContent;
 
 const print = (report, logger, formatter) => {
   if (report.error) {
@@ -66,3 +66,4 @@ exports.headMain = headMain;
 exports.firstNLines = firstNLines;
 exports.firstNChars = firstNChars;
 exports.printResult = printResult;
+exports.headOfFile = headOfFile;

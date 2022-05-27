@@ -7,7 +7,7 @@ const main = () => {
     const logger = { stdOut: console.log, stdError: console.error };
     process.exitCode = headMain(fs.readFileSync, logger, process.argv.slice(2));
   } catch (error) {
-    console.error('head', error.message);
+    console.error(error.message);
     console.error('usage: head [-n lines | -c bytes] [file ...]');
     process.exitCode = 1;
   }
