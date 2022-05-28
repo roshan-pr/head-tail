@@ -2,11 +2,16 @@ const assert = require('assert');
 const { tailParser } = require('../src/tailParser.js');
 
 describe.only('tailParser', () => {
-  it('Should parse option argument, `-option number`', () => {
+  it.only('Should parse option argument, `-option number`', () => {
     assert.deepStrictEqual(tailParser(['-n', '2']),
-      { option: { name: '-n', limit: 2 } });
+      { options: [{ flag: '-n', limit: 2 }], files: [] });
 
     assert.deepStrictEqual(tailParser(['-c', 3]),
-      { option: { name: '-c', limit: 3 } });
+      { options: [{ flag: '-c', limit: 3 }], files: [] });
+  });
+
+  it('Should parse option argument, `-option number`', () => {
+    assert.deepStrictEqual(tailParser(['-n', '2', '-n', '3', 'file']),
+      { options: [{ flag: '-n', limit: 2 }, { flag: '-n', limit: 3 }], files: ['file'] });
   });
 });

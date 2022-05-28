@@ -2,7 +2,8 @@
 
 - **TODO**
 
-  - [ ] Handle same option multiple times.
+  - [ ] Extract parser from tailParser.
+  - [ ] Validate the options.
   - [ ] Make parser work for option without limit, like -r and -q.
 
   - [ ] Provide files and change the contract of parser.
@@ -17,6 +18,7 @@
 
 - **DONE**
 
+  - [x] Handle same option multiple times.
   - [x] Implement parser for tail.
   - [x] Make tail work for multiple files.
   - [x] Provide args to tailMain from tail.js.
