@@ -4,13 +4,10 @@
 
   - [ ] Extract parser from tailParser.
   - [ ] Validate the options.
-  - [ ] Make parser work for option without limit, like -r and -q.
 
   - [ ] Provide files and change the contract of parser.
-
-
-  - [ ] Handle options in parser, return the files and options(with its properties).
-  - [ ] Accept options starting from '+'.
+  - [ ] Handle options in `parser`, return the files and options(with its properties).
+  - [ ] Accept `options` starting from '+'.
   
 
 - **MAYBE**
@@ -18,6 +15,7 @@
 
 - **DONE**
 
+  - [x] Make parser work for option without limit, like -r and -q.
   - [x] Handle same option multiple times.
   - [x] Implement parser for tail.
   - [x] Make tail work for multiple files.
