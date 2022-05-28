@@ -27,7 +27,7 @@ const isNumericOption = (arg) => isFinite(arg);
 
 const splitArg = arg => {
   if (isOption(arg)) {
-    return isNumericOption(arg) ? [splitAt(arg, 1)] : splitAt(arg, 2);
+    return isNumericOption(arg) ? splitAt(arg, 1) : splitAt(arg, 2);
   }
   return arg;
 };

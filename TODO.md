@@ -2,6 +2,8 @@
 
 - **TODO**
 
+  - [ ] Implement parser for tail.
+
   - [ ] Handle options in parser, return the files and options(with its properties).
   - [ ] Accept options starting from '+'.
   
@@ -31,16 +33,15 @@
 
 - **TODO**
 
+- **MAYBE**
   - [ ] Change the contract of head, pass the strategy function reference to head.
   - [ ] Consider different data structure for head.
   - [ ] Implement tests for headOfFile and printResult.
 
-- **MAYBE**
-
-  - [ ] Extract files handling separate, in head main.
 
 - **DONE**
 
+  - [x] Extract files handling separate, in head main.
   - [x] Refactor headMain, separate each file processing and log the report.
   - [x] Consider Change structure of a general function of splitFromStart.
   - [x] Split into separate functions for line and bytes.
